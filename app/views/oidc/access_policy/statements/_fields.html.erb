@@ -4,7 +4,7 @@
     <p/>
     <%= f.collection_select :effect, f.object.class::EFFECTS, :to_s, :to_s, selected: :effect, class: "form__input form__select" %>
   </div>
-  <div class="form__group t-item--hidden">
+  <div class="form__group">
     <%= f.label :principal, class: "form__label" %>
     <%= f.fields_for :principal, f.object.principal do |f| %>
       <div class="form__nested_fields" id="<%= f.field_id :wrapper %>">
