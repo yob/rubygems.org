@@ -1,24 +1,28 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["select", "fieldset"]
-
-  connect() {
-    this.toggleSelector("github");
+  static targets = ["fieldset"]
+  static values = {
+    trustedPublisher: String
   }
 
-  selectTargetConnected(el) {
-    el.addEventListener("change", (evt) => this.toggleSelector(evt.target.value))
-  }
+  trustedPublisherValueChanged() {
+    var value = this.trustedPublisherValue
 
-  toggleSelector(value) {
     this.fieldsetTargets.forEach((target) => {
       const key = target.dataset.key
       if (key === value) {
         target.classList.remove("t-item--hidden")
+        target.setAttribute("disabled", false)
       } else {
         target.classList.add("t-item--hidden")
+        target.setAttribute("disabled", true)
       }
     })
+  }
+
+  toggleSelector(evt) {
+    var value = evt.target.value;
+    this.trustedPublisherValue = value;
   }
 }

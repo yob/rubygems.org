@@ -17,22 +17,22 @@ class OIDC::RubygemTrustedPublishers::NewView < ApplicationView
       form_with(
         model: rubygem_trusted_publisher,
         url: rubygem_trusted_publishers_path(rubygem_trusted_publisher.rubygem.slug),
-        data: { controller: "foo" }
+        data: { controller: "foo", foo_trusted_publisher_value: "github" }
       ) do |f|
         f.label :trusted_publisher_type, class: "form__label"
         f.select :trusted_publisher_type, [["GitHub","github"],["Buildkite","buildkite"]], {},
-          data: {foo_target: "select"},
+          data: {action: "foo#toggleSelector"},
           class: "form__input form__select"
           #OIDC::TrustedPublisher.all.map { |type|
           #                                  [type.publisher_name, type.polymorphic_name]
           #                                }, {}, class: "form__input form__select"
 
-        div(data: {foo_target: "fieldset", key: "github"}) do
+        fieldset(data: {foo_target: "fieldset", key: "github"}) do
           render OIDC::TrustedPublisher::GitHubAction::FormComponent.new(
             github_action_form: f
           )
         end
-        div(data: {foo_target: "fieldset", key: "buildkite"}) do
+        fieldset(data: {foo_target: "fieldset", key: "buildkite"}) do
           "Buildkite"
         end
         f.submit class: "form__submit"
