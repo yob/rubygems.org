@@ -127,7 +127,7 @@ Rails.application.configure do
       'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
     }
     config.assets.compile = false
-    config.assets.digest = true
+    config.assets.digest = false
     config.assets.debug = false
 
     config.active_record.migration_error = false
